@@ -3,15 +3,10 @@ import { Card, CardImg, CardImgOverlay, CardBody, CardText, CardTitle } from 're
 
 
 
-class Dish extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
 
-        }
-    }
+    
 
-    renderDish(dish) {
+   function RenderDish({dish}) {
         if (dish != null) {
             return (
                 <Card>
@@ -38,7 +33,7 @@ class Dish extends Component {
     }
 
 
-    renderComments(comments) {
+  function  RenderComments({comments}) {
         if (comments != null) {
             const list = comments.map((comment) => {
                 return (
@@ -63,16 +58,17 @@ class Dish extends Component {
         } else {
             return (
                 <div>
-
+                    
                 </div>
             )
         }
     }
 
 
-    render() {
-        const dish = this.props.selectDish;
-
+    const Dish=(props)=> {
+        const dish = props.selectDish;
+        
+        
 
 
 
@@ -80,13 +76,13 @@ class Dish extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-12 col-md-5 m-1">
-                        {this.renderDish(dish)}
+                        <RenderDish dish={dish} />
 
 
-                    </div>
+                    </div> 
                     <div className="col-12 col-md-5 m-1">
-                        {this.renderComments(dish.comments)}
-
+                        
+                    <RenderComments comments={dish.comments} />
 
                     </div>
 
@@ -95,6 +91,6 @@ class Dish extends Component {
 
         );
     }
-}
+
 
 export default Dish;
