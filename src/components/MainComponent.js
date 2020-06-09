@@ -7,6 +7,8 @@ import Menu from './MenuComponent';//default export imported with own name
 import { Dishes } from '../shared/dishes'; //named import export should be written in braces
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
+import Home from './HomeComponent';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 class Main extends Component {
   constructor(props) {
@@ -16,24 +18,17 @@ class Main extends Component {
       selectedDish: null
     };
   }
-  onDishSelect(dishId) {
-    this.setState({ selectedDish: dishId });
-  }
+
 
   render() {
     return (
       <div>
         <Header />
-        <Menu dishes={this.state.dishes}
-          onClick={(dishId) => this.onDishSelect(dishId)} />
-        {
-          this.state.selectedDish !== null ?
-            <div>
-              <Dish selectDish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0]} />
-            </div> :
-            <div>
-            </div >
-        }
+        <Switch>
+          <Route path="/home" component={Home} />
+          <Route  exact path="/menu" component={()=><Menu dishes={this.state.dishes} />} />
+          <Redirect to ="/home" />
+        </Switch>
         <Footer />
 
       </div>
